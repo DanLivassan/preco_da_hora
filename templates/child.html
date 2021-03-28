@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<table>
+    <thead>
+    <tr>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Data encontrada</th>
+        <th>Local</th>
+        <th>CEP</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in data %}
+    <tr>
+        <td>{{product['description']}}</td>
+        <td>{{product['price']}}</td>
+        <td>{{product['found_date']}}</td>
+         <td>{{product['store']['name']}}</td>
+        <td><a href="https://www.google.com/search?q={{product['store']['cep']}} {{product['store']['name']}}"> {{product['store']['cep']}}</a></td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}
