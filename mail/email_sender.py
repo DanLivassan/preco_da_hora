@@ -11,7 +11,7 @@ class EmailSender:
     @staticmethod
     def send_mail(bodyContent, to_email, subject):
         to_email = to_email
-        from_email = creds.USER
+        from_email = "Preco da Hora "
         subject = subject
         message = MIMEMultipart()
         message['Subject'] = subject
@@ -21,16 +21,17 @@ class EmailSender:
         msgBody = message.as_string()
         server = SMTP(creds.HOST, creds.PORT)
         server.starttls()
-        server.login(from_email, creds.PASSWORD)
+        server.login(creds.USER, creds.PASSWORD)
         server.sendmail(from_email, to_email, msgBody)
         server.quit()
 
     @staticmethod
-    def send_products(products):
+    def send_products(subject, products):
+        subject = "Sua pesquisa sobre {}".format(subject)
         env = Environment(
             loader=PackageLoader('templates', ''),
             autoescape=select_autoescape(['html', 'xml'])
         )
         template = env.get_template('child.html')
         output = template.render(data=products)
-        EmailSender.send_mail(output, "daniloxc@msn.com", "Produtos")
+        EmailSender.send_mail(output, "daniloxc@msn.com", subject)
