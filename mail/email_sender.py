@@ -26,7 +26,7 @@ class EmailSender:
         server.quit()
 
     @staticmethod
-    def send_products(subject, products):
+    def send_products(subject, products, to_email):
         subject = "Sua pesquisa sobre {}".format(subject)
         env = Environment(
             loader=PackageLoader('templates', ''),
@@ -34,4 +34,4 @@ class EmailSender:
         )
         template = env.get_template('child.html')
         output = template.render(data=products)
-        EmailSender.send_mail(output, "daniloxc@msn.com", subject)
+        EmailSender.send_mail(output, to_email, subject)

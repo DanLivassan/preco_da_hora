@@ -19,7 +19,7 @@ Segue a lista de produtos encontrados:
         <td>{{product['price']}}</td>
         <td>{{product['found_date']}}</td>
          <td>{{product['store']['name']}}</td>
-        <td><a href="https://www.google.com/search?q={{product['store']['cep']}} {{product['store']['name']}}"> {{product['store']['cep']}}</a></td>
+        <td><a href="https://www.google.com/maps/@{{product['store']['latitude']}},{{product['store']['longitude']}},21z"> {{product['store']['cep']}}</a></td>
     </tr>
     {% endfor %}
 
